@@ -1,11 +1,19 @@
 import { useEffect, useState } from "react";
 
-import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
-import Updatetodo from "./components/Updatetodo";
+import AddTodoForm from "./components/AddTodoForm";
+import EditTodoForm from "./components/EditTodoForm";
+import SearchTodo from "./components/SearchTodo";
+
+
+
 
 function App() {
+  const [todo, setTodo] = useState({});
   const [todos, setTodos] = useState([]);
+  const [section, setSection] = useState('list');
+  const [searchQuery, setSearchQuery] = useState('');
+
 
   useEffect(() => {
     const todos = JSON.parse(localStorage.getItem('todo')) || [];
@@ -13,14 +21,48 @@ function App() {
     setTodos(todos);
   }, []);
 
+  const handleAddTodo = (todos) => {
+    setTodos(todos);
+    setSection('list');
+  }
+
+  const handleEditTodo = (id) => {
+    setSection('edit-todo');
+    const todo = todos.find((todo) => todo.id === id);
+
+    setTodo(todo);
+  }
+
   return (
     <>
-      <h1>My Todo</h1>
-      <button>Add Todo</button>
+      <h1>My Todo</h1> 
+      <input
+  type="text"
+  name="searchtodo"
+  placeholder="Search my todo"
+  value={searchQuery}
+  onChange={(e) => setSearchQuery(e.target.value)}
+/>
+      <button onClick={() => setSection("add-todo")}>Add Todo</button>
+      
+      {
+        section === 'list' && (
+          <TodoList todos={todos} handleEdit={handleEditTodo} />
+        )
+      }
 
-      <TodoForm setTodos={setTodos} />
-      <TodoList todos={todos} />
-      <Updatetodo />
+      {
+        section === 'add-todo' && (
+          <AddTodoForm handleAddTodo={handleAddTodo} />
+        )
+      }
+
+      {
+        section === 'edit-todo' && (
+          <EditTodoForm handleAddTodo={handleAddTodo} todo={todo} />
+        )
+      }
+     <SearchTodo todos={todos} searchQuery={searchQuery} />
     </>
   )
 }

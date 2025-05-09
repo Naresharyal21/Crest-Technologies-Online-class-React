@@ -1,28 +1,24 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
-const TodoList = (props) => {
-    const { todos, handleEdit } = props;
-
-    const [updatedTodos, setUpdatedTodos] = useState(todos);
-
-    useEffect(() => {
-
-        setUpdatedTodos(todos);
-    }, [todos]);
-
-    const deleteTodo = (id) => {
-        const newTodos = updatedTodos.filter((todo) => todo.id !== id);
-
-        localStorage.setItem('todo', JSON.stringify(newTodos));
-
-        setUpdatedTodos(newTodos);
+const SearchTodo =({todos,searchQuery})=>{
+    
+    const filteredTodos = todos.filter(todo =>
+        todo.title.toLowerCase().includes(searchQuery.toLowerCase())
+       
+    );
+    if(searchQuery.trim() ==='') {
+        return null;
     }
-
-    return (
-        <div>
-            <p>My Todos</p>
-
-            <table>
+    return(
+        <>
+        
+        <h2>Search Results:</h2>
+        {filteredTodos.length === 0 ? (
+                <p>No results found</p> 
+            ) : (
+      
+        
+        <table>
                 <thead>
                     <tr>
                         <th>S.N.</th>
@@ -35,7 +31,7 @@ const TodoList = (props) => {
                 </thead>
                 <tbody>
                     {
-                        updatedTodos.map((todo, index) => (
+                        filteredTodos.map((todo, index) => (
                             <tr key={index} >
                                 <td style={{ border: "1px solid black" }}>{index + 1}</td>
                                 <td style={{ border: "1px solid black" }}>{todo.createdAt}</td>
@@ -43,16 +39,16 @@ const TodoList = (props) => {
                                 <td style={{ border: "1px solid black" }}>{todo.description}</td>
                                 <td style={{ border: "1px solid black" }}>{todo.status}</td>
                                 <td style={{ border: "1px solid black" }}>
-                                    <button onClick={() => handleEdit(todo.id)}>Edit</button>
-                                    <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+                                   
                                 </td>
                             </tr>
                         ))
                     }
                 </tbody>
             </table>
-        </div>
+            )}
+        </>
     )
-}
-
-export default TodoList
+    
+};
+export default SearchTodo;
