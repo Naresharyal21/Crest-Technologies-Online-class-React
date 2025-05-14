@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import TodoList from "./components/TodoList";
 import AddTodoForm from "./components/AddTodoForm";
 import EditTodoForm from "./components/EditTodoForm";
-import SearchTodo from "./components/SearchTodo";
+
 
 
 
@@ -35,19 +35,13 @@ function App() {
 
   return (
     <>
-      <h1>My Todo</h1> 
-      <input
-  type="text"
-  name="searchtodo"
-  placeholder="Search my todo"
-  value={searchQuery}
-  onChange={(e) => setSearchQuery(e.target.value)}
-/>
-      <button onClick={() => setSection("add-todo")}>Add Todo</button>
+      <h1 className="rf-m">My Todo</h1> 
+ 
+      
       
       {
         section === 'list' && (
-          <TodoList todos={todos} handleEdit={handleEditTodo} />
+          <TodoList todos={todos} handleEdit={handleEditTodo} setSection={setSection} />//my change
         )
       }
 
@@ -62,7 +56,7 @@ function App() {
           <EditTodoForm handleAddTodo={handleAddTodo} todo={todo} />
         )
       }
-     <SearchTodo todos={todos} searchQuery={searchQuery} />
+    
     </>
   )
 }
