@@ -99,8 +99,8 @@ const handletitleSort = () => {
         const titleB = b.title.toLowerCase();
 
         return titlesort
-            ? titleA.localeCompare(titleB)  // A-Z
-            : titleB.localeCompare(titleA); // Z-A
+            ? titleA.localeCompare(titleB)  
+            : titleB.localeCompare(titleA); 
     });
 
     setUpdatedTodos(sorted);
@@ -113,8 +113,8 @@ const handledescSort = () => {
         const titleB = b.description.toLowerCase();
 
         return descsort
-            ? titleA.localeCompare(titleB)  // A-Z
-            : titleB.localeCompare(titleA); // Z-A
+            ? titleA.localeCompare(titleB)  
+            : titleB.localeCompare(titleA); 
     });
 
     setUpdatedTodos(sorted);
@@ -127,8 +127,8 @@ const handledstatusSort = () => {
         const titleB = b.status.toLowerCase();
 
         return statussort
-            ? titleA.localeCompare(titleB)  // A-Z
-            : titleB.localeCompare(titleA); // Z-A
+            ? titleA.localeCompare(titleB)  
+            : titleB.localeCompare(titleA); 
     });
 
     setUpdatedTodos(sorted);
@@ -195,7 +195,7 @@ const handledstatusSort = () => {
                 <tbody>
                     {
                         updatedTodos.map((todo, index) => (
-                            <tr key={index} >
+                            <tr key={index+1} >
                                 <td className='border-1 py-10 '>{index + 1}</td>
                                 <td className='border-1 py-10  '>{getDate(todo.createdAt)}</td>
                                 <td className='border-1 py-10  '>{todo.title}</td>

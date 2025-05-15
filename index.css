@@ -178,16 +178,3 @@ padding-left: 5px;
 /* .firstbtn{
   transform: translateX(-60px);
 } */
-.editmain{
-  display: flex;
-  flex-direction: column;
-  margin-left: 40%;
-  
-}
-.sww{
-  width: 50%;
-  height: 30px;
-}
-.edittodo{
- margin-left: 50%; 
-}

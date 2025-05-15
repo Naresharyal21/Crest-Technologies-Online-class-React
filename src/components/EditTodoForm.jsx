@@ -61,32 +61,32 @@ const EditTodoForm = (props) => {
 
     return (
         <div>
-            <h1>Edit Todo</h1>
+            <h1 className='edittodo'>Edit Todo</h1>
 
-            <form onSubmit={handleSubmit}>
-                <input
+            <form  className='editmain'onSubmit={handleSubmit}>
+                <input className='sww'
                     type="text"
                     name="title"
                     placeholder="Enter todo title"
                     defaultValue={todo.title}
                 />
-                <p>{errors['title']}</p>
+                <p className='ercolor'>{errors['title']}</p>
 
-                <input
+                <input className='sww'
                     type="text"
                     name="description"
                     placeholder="Enter todo description"
                     defaultValue={todo.description}
                 />
-                <p>{errors['description']}</p>
+                <p className='ercolor'>{errors['description']}</p>
 
-                <select name="status" defaultValue={todo.status}>
+                <select  className='sww'name="status" defaultValue={todo.status}>
                     <option value="PENDING">Pending</option>
                     <option value="IN PROGRESS">In Progress</option>
                     <option value="COMPLETED">Completed</option>
                 </select>
 
-                <button>Save</button>
+                <button className='sww'>Save</button>
             </form>
         </div>
     )
